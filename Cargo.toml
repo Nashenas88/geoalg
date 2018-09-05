@@ -1,0 +1,6 @@
+[package]
+name = "geoalg"
+version = "0.1.0"
+authors = ["Paul Faria <Nashenas88@gmail.com>"]
+
+[dependencies]
