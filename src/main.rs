@@ -17,7 +17,7 @@ fn main() {
     let mut multiplied = &ri * &vector;
     println!("v' = {} {}", multiplied, rotor);
     multiplied.simplify();
-    println!("simplified:\n{} {}", multiplied, rotor);
+    println!("simplified:\nv' = {} {}", multiplied, rotor);
 
     println!();
 
@@ -26,7 +26,7 @@ fn main() {
     finished.simplify();
 
     println!("\nsimplified:\nv' = {}", finished);
-    println!("--\nsuper simplified:\nv' = {}", finished.into_final());
+    println!("--\nsuper simplified:\nv' =\n{}", finished.into_final());
 
     let rotor2 = Multivector::from_rotor('Z', 'Y', 'X', 'W', 'V', 'U', 'T', 'S');
     let mut mult = &rotor * &rotor2;
