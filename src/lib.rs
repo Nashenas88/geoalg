@@ -516,10 +516,14 @@ impl Multivector {
         }
     }
 
-    pub fn inverse(&self) -> Self {
+    pub fn reverse(&self) -> Self {
         let mut rotor = self.clone();
 
         for param in rotor.params.iter_mut().skip(1) {
+            if param.bases.len() != 2 {
+                continue;
+            }
+
             for var_param in param.var_params.iter_mut() {
                 var_param.negative = !var_param.negative;
             }
@@ -530,13 +534,10 @@ impl Multivector {
 
     pub fn into_final(self) -> String {
         let mut fin = String::new();
-        fin += "[";
 
         for param in self.params.into_iter() {
-            fin += &format!("+ {}", param.into_final());
+            fin += &format!("{}\n", param.into_final());
         }
-
-        fin += "]";
 
         fin
     }

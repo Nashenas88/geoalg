@@ -6,100 +6,32 @@ fn main() {
     let rotor = Multivector::from_rotor('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H');
     let vector = Multivector::from_vector(Var::a(), Var::b(), Var::c(), Var::d());
 
-    println!("{}", rotor);
-    println!("{}", vector);
+    println!("r = {}", rotor);
+    println!("v = {}", vector);
+    println!("v' = r⁻¹vr");
+    let ri = rotor.reverse();
+    println!("r⁻¹ = {}", ri);
 
-    let ri = rotor.inverse();
+    println!();
 
     let mut multiplied = &ri * &vector;
-    println!("{}", multiplied);
+    println!("v' = {} {}", multiplied, rotor);
     multiplied.simplify();
-    println!("{}", multiplied);
+    println!("simplified:\n{} {}", multiplied, rotor);
+
+    println!();
 
     let mut finished = &multiplied * &rotor;
-    println!("{}", finished);
+    println!("v' = {}", finished);
     finished.simplify();
 
-    println!("\n{}", finished);
-    println!("--\n{}", finished.into_final());
+    println!("\nsimplified:\nv' = {}", finished);
+    println!("--\nsuper simplified:\nv' = {}", finished.into_final());
 
-    // let rotor = Rotor {
-    //     params: vec![
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('A')],
-    //             bases: vec![],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('B')],
-    //             bases: vec![Base(1), Base(2)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('C')],
-    //             bases: vec![Base(1), Base(3)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('D')],
-    //             bases: vec![Base(1), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('E')],
-    //             bases: vec![Base(2), Base(3)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('F')],
-    //             bases: vec![Base(2), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('G')],
-    //             bases: vec![Base(3), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('H')],
-    //             bases: vec![Base(1), Base(2), Base(3), Base(4)],
-    //         }
-    //     ]
-    // };
-
-    // let rotor2 = Rotor {
-    //     params: vec![
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('Z')],
-    //             bases: vec![],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('Y')],
-    //             bases: vec![Base(1), Base(2)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('X')],
-    //             bases: vec![Base(2), Base(3)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('W')],
-    //             bases: vec![Base(1), Base(3)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('V')],
-    //             bases: vec![Base(1), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('U')],
-    //             bases: vec![Base(2), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('T')],
-    //             bases: vec![Base(3), Base(4)],
-    //         },
-    //         Param {
-    //             var_params: vec![VarParam::from_scalar('S')],
-    //             bases: vec![Base(1), Base(2), Base(3), Base(4)],
-    //         }
-    //     ]
-    // };
-
-    // let mut mult = rotor * rotor2;
-    // println!("{}", mult);
-    // mult.simplify();
-    // println!("{}", mult);
-    // println!("{}", mult.into_final());
+    let rotor2 = Multivector::from_rotor('Z', 'Y', 'X', 'W', 'V', 'U', 'T', 'S');
+    let mut mult = &rotor * &rotor2;
+    println!("m = {}", mult);
+    mult.simplify();
+    println!("m = {}", mult);
+    println!("m =\n{}", mult.into_final());
 }
